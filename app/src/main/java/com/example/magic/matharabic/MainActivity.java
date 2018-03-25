@@ -8,32 +8,28 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    MediaPlayer Hello;
+
     MediaPlayer Button;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //inflater
-        LayoutInflater myInflater=getLayoutInflater();
-        View myView=myInflater.inflate(R.layout.welcome,(ViewGroup) findViewById(R.id.WelcomeLayout));
 
-        Toast toast=new Toast(getApplicationContext());
-        toast.setGravity(Gravity.RIGHT,20,20);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(myView);
-        toast.show();
-        //initilize sound
-        Hello=MediaPlayer.create(MainActivity.this,R.raw.hello);
+        setContentView(R.layout.activity_main);
+
         Button=MediaPlayer.create(MainActivity.this,R.raw.button);
-        Hello.start();
+
+
 
     }
 

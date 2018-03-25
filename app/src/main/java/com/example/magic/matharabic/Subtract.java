@@ -29,7 +29,7 @@ public class Subtract extends AppCompatActivity {
     MediaPlayer Buttonsound;
     MediaPlayer correctsound;
     MediaPlayer WrongAnswer;
-    MediaPlayer Cry;
+
     Bitmap Correct;
     static int count;
     static int id=1;
@@ -55,7 +55,7 @@ public class Subtract extends AppCompatActivity {
         toast.setView(myView);
 
         //right answer View
-        View rightView=myInflater.inflate(R.layout.right,(ViewGroup) findViewById(R.id.right));
+        View rightView=myInflater.inflate(R.layout.gift,(ViewGroup) findViewById(R.id.GiftLayout));
         toastR=new Toast(getApplicationContext());
         toastR.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
         toastR.setDuration(Toast.LENGTH_LONG);
@@ -65,14 +65,13 @@ public class Subtract extends AppCompatActivity {
         View wrongView=myInflater.inflate(R.layout.wrong,(ViewGroup) findViewById(R.id.wrong));
         toastwrong=new Toast(getApplicationContext());
         toastwrong.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
-        toastwrong.setDuration(Toast.LENGTH_LONG);
+        toastwrong.setDuration(Toast.LENGTH_SHORT);
         toastwrong.setView(wrongView);
 
         //initialize sound
         Buttonsound=MediaPlayer.create(Subtract.this,R.raw.button);
         correctsound=MediaPlayer.create(Subtract.this,R.raw.e);
         WrongAnswer=MediaPlayer.create(Subtract.this,R.raw.wrong2);
-        Cry=MediaPlayer.create(Subtract.this,R.raw.cry);
 
 
 
@@ -166,8 +165,9 @@ public class Subtract extends AppCompatActivity {
         if(bmap.sameAs(Correct))
         {
             toastR.show();
-            correctsound.start();
             q.setImageBitmap(bmap);
+            correctsound.start();
+            PlayAgainSubtract();
             finish=1;}
         else
         {
@@ -184,8 +184,10 @@ public class Subtract extends AppCompatActivity {
         if(bmap.sameAs(Correct))
         {
             toastR.show();
-            correctsound.start();
             q.setImageBitmap(bmap);
+            correctsound.start();
+
+            PlayAgainSubtract();
             finish=1;}
         else
         {
@@ -199,8 +201,10 @@ public class Subtract extends AppCompatActivity {
         if(bmap.sameAs(Correct))
         {
             toastR.show();
-            correctsound.start();
             q.setImageBitmap(bmap);
+            correctsound.start();
+
+            PlayAgainSubtract();
             finish=1;}
         else
         {
@@ -208,10 +212,14 @@ public class Subtract extends AppCompatActivity {
             WrongAnswer.start();}
     }
 
-    public void PlayAgainSubtract(View view) {
+    public void PlayAgainSubtract() {
 
-        Buttonsound.start();
-        stopAllSounds();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         if(finish==1)
             count++;
@@ -264,8 +272,8 @@ public class Subtract extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            if(finish==0)
-                Cry.start();
+           // if(finish==0)
+            //    Cry.start();
         }
     }
 
@@ -273,7 +281,7 @@ public class Subtract extends AppCompatActivity {
         Buttonsound.stop();
         correctsound.stop();
         WrongAnswer.stop();
-        Cry.stop();
+       // Cry.stop();
 
     }
 }

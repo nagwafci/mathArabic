@@ -12,32 +12,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="383dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="350dp"
         android:gravity="center_horizontal">
 
         <ImageView
             android:id="@+id/sum"
-            android:layout_width="101dp"
-            android:layout_height="161dp"
-            android:layout_marginTop="200dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:clickable="true"
             android:onClick="sum"
             app:srcCompat="@drawable/sum" />
 
         <ImageView
             android:id="@+id/sub"
-            android:layout_width="129dp"
-            android:layout_height="172dp"
-            android:layout_marginTop="200dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:clickable="true"
             android:onClick="subtracion"
             app:srcCompat="@drawable/sub" />
 
         <ImageView
             android:id="@+id/count"
-            android:layout_width="109dp"
-            android:layout_height="171dp"
-            android:layout_marginTop="200dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:clickable="true"
             android:onClick="count"
             app:srcCompat="@drawable/count" />

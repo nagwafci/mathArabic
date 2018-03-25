@@ -1,14 +1,18 @@
 package com.example.magic.matharabic;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +21,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,21 +36,25 @@ import java.util.Random;
 
 public class count extends AppCompatActivity {
 
+    Activity myActivity;
     MediaPlayer Buttonsound;
     MediaPlayer correctsound;
     MediaPlayer WrongAnswer;
-    MediaPlayer Cry;
+
     static int count;
     static int id=1;
     int finish=0;
     int destroy=0;
     int correctResult;
-    counter ct;
-    NotificationChannel mychannel;
+
+
     Toast toastR;
     Toast toastwrong;
+
     Bitmap Correct;
     Boolean trueAnswer=false;
+
+    ImageView[] stars;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +66,11 @@ public class count extends AppCompatActivity {
         View myView=myInflater.inflate(R.layout.gift,(ViewGroup) findViewById(R.id.GiftLayout));
         Toast toast=new Toast(getApplicationContext());
         toast.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(myView);
 
         //right answer inflater
-        View rightView=myInflater.inflate(R.layout.right,(ViewGroup) findViewById(R.id.right));
+        View rightView=myInflater.inflate(R.layout.gift,(ViewGroup) findViewById(R.id.GiftLayout));
         toastR=new Toast(getApplicationContext());
         toastR.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
         toastR.setDuration(Toast.LENGTH_SHORT);
@@ -76,7 +88,7 @@ public class count extends AppCompatActivity {
         Buttonsound=MediaPlayer.create(count.this,R.raw.button);
         correctsound=MediaPlayer.create(count.this,R.raw.e);
         WrongAnswer=MediaPlayer.create(count.this,R.raw.wrong2);
-        Cry=MediaPlayer.create(count.this,R.raw.cry);
+
 
         //initilize number images
         int[] NumberImage={R.drawable.onear,R.drawable.twoar,R.drawable.threear,R.drawable.fourar,
@@ -128,27 +140,12 @@ public class count extends AppCompatActivity {
         myAdapter duckAdapter=new myAdapter(randomNum);
         list.setAdapter(duckAdapter);
 
-        //create counter
-        ct =new counter(10000,100);
-        ct.start();
-
-        //create notifcation after 4 true results        String message=getResources().getString(R.string.good);
-        NotificationCompat.Builder notif=new NotificationCompat.Builder(this,"1")
-                .setSmallIcon(R.drawable.redbox)
-                .setContentText("good")
-                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
-        NotificationManager manager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if(count==4)
-        {
-            toast.show();
-            manager.notify(id,notif.build());
-            count=0;
-            id++;
-        }
-
-
-
     }
+
+
+
+
+
     class  myAdapter   extends BaseAdapter {
         int ducksNumber;
         public myAdapter(int ducksNumber) {
@@ -179,7 +176,8 @@ public class count extends AppCompatActivity {
             return  myView;
         }
     }
-    @Override
+
+        @Override
     protected void onDestroy() {
 
         destroy=1;
@@ -192,9 +190,8 @@ public class count extends AppCompatActivity {
         Bitmap bmap = ((BitmapDrawable)R1.getDrawable()).getBitmap();
         if(bmap.sameAs(Correct))
         {
-            correctsound.start();
-            toastR.show();
-            trueAnswer=true;}
+
+            TrueAnswer();}
         else
         {
             toastwrong.show();
@@ -209,9 +206,9 @@ public class count extends AppCompatActivity {
         Bitmap bmap = ((BitmapDrawable)R2.getDrawable()).getBitmap();
         if(bmap.sameAs(Correct))
         {
-            correctsound.start();
-            toastR.show();
-            trueAnswer=true;}
+
+
+            TrueAnswer();}
         else
         {
             toastwrong.show();
@@ -225,9 +222,9 @@ public class count extends AppCompatActivity {
         Bitmap bmap = ((BitmapDrawable)R3.getDrawable()).getBitmap();
         if(bmap.sameAs(Correct))
         {
-            correctsound.start();
-            toastR.show();
-            trueAnswer=true;}
+
+
+            TrueAnswer();}
         else
         {
             toastwrong.show();
@@ -235,13 +232,24 @@ public class count extends AppCompatActivity {
             trueAnswer=false;}
 
     }
-    public void PlayAgain(View view) {
 
-        stopAllSounds();
+    public void TrueAnswer(){
+        toastR.show();
         count++;
+        correctsound.start();
 
+        PlayAgain();
+    }
+
+    public void PlayAgain() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Intent i = new Intent(this,count.class);
-        //the following 2 tags are for clearing the backStack and start fresh
+
+         //the following 2 tags are for clearing the backStack and start fresh
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
@@ -249,33 +257,18 @@ public class count extends AppCompatActivity {
 
     }
     public void Home(View view) {
-        Buttonsound.start();
+
         stopAllSounds();
+        Buttonsound.start();
         Intent SumIntent=new Intent(this,MainActivity.class);
         startActivity(SumIntent);
     }
-    public class counter extends CountDownTimer {
 
-        public counter(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            // if(finish==0&&destroy==0)countersound.start();
-        }
-
-        @Override
-        public void onFinish() {
-            if(finish==0)
-                Cry.start();
-        }
-    }
     public void stopAllSounds(){
         Buttonsound.stop();
         correctsound.stop();
         WrongAnswer.stop();
-        Cry.stop();
+
 
     }
 }

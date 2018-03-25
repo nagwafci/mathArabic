@@ -4,32 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:background="@drawable/back5"
     tools:context="com.example.magic.matharabic.count">
 
-    <ImageView
-        android:id="@+id/HomeImge"
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:onClick="Home"
-        app:srcCompat="@drawable/myhome" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/HomeImge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:onClick="Home"
+            android:visibility="visible"
+            app:srcCompat="@drawable/myhome" />
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="40dp"
+            android:layout_weight="0"
+
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
     <GridView
         android:id="@+id/grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:columnWidth="100dp"
+        android:gravity="center_horizontal"
         android:horizontalSpacing="10dp"
         android:numColumns="5"
-        android:gravity="center_horizontal"
         android:stretchMode="columnWidth">
 
 
     </GridView>
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -42,9 +69,9 @@
 
         <ImageView
             android:id="@+id/R2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:clickable="true"
             android:focusable="true"
@@ -56,9 +83,9 @@
 
         <ImageView
             android:id="@+id/R3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:clickable="true"
             android:focusable="true"
@@ -68,9 +95,9 @@
 
         <ImageView
             android:id="@+id/R1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:clickable="true"
 
@@ -81,13 +108,12 @@
 
 
     </LinearLayout>
-    <ImageView
 
-        android:id="@+id/next"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|end"
-        android:onClick="PlayAgain"
-        app:srcCompat="@drawable/next" />
+        app:srcCompat="@drawable/redbox"
+        android:layout_gravity="end"/>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back5"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context="com.example.magic.matharabic.Subtract">
 
@@ -74,25 +74,21 @@
 
         <ImageView
             android:id="@+id/R2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
             android:clickable="true"
-
+            android:layout_weight="1"
             android:focusable="true"
-            android:gravity="right"
             android:onClick="R2click"
             android:text="R2"
             app:srcCompat="@drawable/miniduck" />
 
         <ImageView
             android:id="@+id/R3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginRight="40dp"
+            android:layout_weight="1"
             android:clickable="true"
-
             android:focusable="true"
             android:onClick="R3click"
             android:text="R3"
@@ -100,12 +96,10 @@
 
         <ImageView
             android:id="@+id/R1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:clickable="true"
-
+            android:layout_weight="1"
             android:focusable="true"
             android:onClick="R1click"
             android:text="R1"
@@ -114,13 +108,4 @@
 
     </LinearLayout>
 
-    <ImageView
-
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-
-        android:onClick="PlayAgainSubtract"
-        app:srcCompat="@drawable/next" />
 </LinearLayout>
